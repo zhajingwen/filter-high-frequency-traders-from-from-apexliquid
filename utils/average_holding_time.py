@@ -3,7 +3,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 
 
-class HyperliquidAnalyzer:
+class AverageHoldingTimeAnalyzer:
     """Hyperliquid交易数据分析器"""
     
     def __init__(self, user_address):
@@ -175,7 +175,7 @@ class HyperliquidAnalyzer:
         """获取未平仓位"""
         return {coin: pos for coin, pos in self.positions.items() if pos}
     
-    def print_statistics(self):
+    def print_statistics(self, overall):
         """打印统计信息"""
         print("=" * 80)
         print("持仓时间统计报告")
@@ -202,7 +202,6 @@ class HyperliquidAnalyzer:
             print(f"  总平仓量: {stats['total_size']:.4f}")
         
         # 打印总体统计
-        overall = self.get_overall_statistics()
         if overall:
             print("\n" + "=" * 80)
             print("【总体统计】")
@@ -237,9 +236,15 @@ class HyperliquidAnalyzer:
             
             # 计算持仓时间
             self.calculate_average_holding_time()
-            
+            # 获取总体统计数据
+            overall = self.get_overall_statistics()
+            overall_simple_avg = overall['overall_simple_avg']
+            if overall_simple_avg > 1:
+                print(f"总体简单平均持仓时间: {overall_simple_avg} 小时 {self.user_address}")
+                return
             # 打印统计信息
-            self.print_statistics()
+            self.print_statistics(overall)
+            return self.user_address
             
         except requests.exceptions.RequestException as e:
             print(f"请求失败: {e}")
@@ -255,7 +260,7 @@ def main():
     user_address = "0xf709deb9ca069e53a31a408fde397a87d025a352"
     
     # 创建分析器并执行分析
-    analyzer = HyperliquidAnalyzer(user_address)
+    analyzer = AverageHoldingTimeAnalyzer(user_address)
     analyzer.analyze()
 
 
