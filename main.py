@@ -18,9 +18,10 @@ for trade in trades:
         # 如果地址在黑名单中，则跳过
         if address in content:
             continue
-        # 分析指定的地址
-        if address != '0x17eb41cc719d2b7406acea9bdb1dcf63ecd8067f':
-            continue
+
+        # # 分析指定的地址
+        # if address != '0x17eb41cc719d2b7406acea9bdb1dcf63ecd8067f':
+        #     continue
 
         analyzer = AverageHoldingTimeAnalyzer(address)
         address = analyzer.analyze()
