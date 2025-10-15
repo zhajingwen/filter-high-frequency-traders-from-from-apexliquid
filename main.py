@@ -1,7 +1,6 @@
 import json
 from utils.config import address_list
-# from utils.average_holding_time import AverageHoldingTimeAnalyzer
-from utils.average_holding_time2 import AverageHoldingTimeAnalyzer
+from utils.average_holding_time import AverageHoldingTimeAnalyzer
 
 
 address_list = json.loads(address_list)
@@ -12,9 +11,11 @@ high_frequency_traders = []
 for trade in trades:
     address = trade.get("address")
     if address:
+        
         # 分析指定的地址
         if address != '0x17eb41cc719d2b7406acea9bdb1dcf63ecd8067f':
             continue
+
         analyzer = AverageHoldingTimeAnalyzer(address)
         address = analyzer.analyze()
         if address:
