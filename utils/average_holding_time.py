@@ -57,6 +57,7 @@ class AverageHoldingTimeAnalyzer:
             size = float(fill['sz'])
             time = fill['time']  # 毫秒时间戳
             direction = fill['dir']
+            print(direction)
             
             # 判断是开仓还是平仓
             is_opening = 'Open' in direction
