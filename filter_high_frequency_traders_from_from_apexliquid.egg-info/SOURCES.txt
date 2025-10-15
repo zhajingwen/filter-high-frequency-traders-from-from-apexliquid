@@ -1,8 +1,0 @@
-README.md
-main.py
-pyproject.toml
-filter_high_frequency_traders_from_from_apexliquid.egg-info/PKG-INFO
-filter_high_frequency_traders_from_from_apexliquid.egg-info/SOURCES.txt
-filter_high_frequency_traders_from_from_apexliquid.egg-info/dependency_links.txt
-filter_high_frequency_traders_from_from_apexliquid.egg-info/requires.txt
-filter_high_frequency_traders_from_from_apexliquid.egg-info/top_level.txt
