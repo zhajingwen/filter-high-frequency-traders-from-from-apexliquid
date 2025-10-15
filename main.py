@@ -8,10 +8,16 @@ trades = address_list.get("data", {}).get("trades", [])
 
 high_frequency_traders = []
 
+# 黑名单记录
+with open("utils/blacklist.txt", "r") as f:
+    content = f.read()
+
 for trade in trades:
     address = trade.get("address")
     if address:
-        
+        # 如果地址在黑名单中，则跳过
+        if address in content:
+            continue
         # 分析指定的地址
         if address != '0x17eb41cc719d2b7406acea9bdb1dcf63ecd8067f':
             continue
