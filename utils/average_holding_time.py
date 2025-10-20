@@ -1,6 +1,7 @@
 import requests
 from collections import defaultdict
 from datetime import datetime, timedelta
+from retry import retry
 
 
 class AverageHoldingTimeAnalyzer:
@@ -23,6 +24,7 @@ class AverageHoldingTimeAnalyzer:
         self.spot_holding_times = defaultdict(list)
         self.spot_positions = defaultdict(list)
     
+    @retry(tries=6, delay=3)
     def fetch_user_fills(self):
         """获取用户的成交记录"""
         headers = {
